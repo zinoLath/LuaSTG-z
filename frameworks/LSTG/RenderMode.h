@@ -12,6 +12,14 @@ namespace lstg
 			cocos2d::backend::BlendOperation blendOp,
 			cocos2d::backend::BlendFactor blendFactorSrc,
 			cocos2d::backend::BlendFactor blendFactorDst,
+			cocos2d::backend::BlendOperation alphaBlendOp,
+			cocos2d::backend::BlendFactor alphaBlendFactorSrc,
+			cocos2d::backend::BlendFactor alphaBlendFactorDst,
+			cocos2d::backend::Program* program);
+		static RenderMode* create(const std::string& name,
+			cocos2d::backend::BlendOperation blendOp,
+			cocos2d::backend::BlendFactor blendFactorSrc,
+			cocos2d::backend::BlendFactor blendFactorDst,
 			cocos2d::backend::Program* program);
 		static RenderMode* create(const std::string& name,
 			cocos2d::backend::Program* program);
@@ -43,9 +51,17 @@ namespace lstg
 
 	protected:
 		bool init(const std::string& name,
-		    cocos2d::backend::BlendOperation equation,
+			cocos2d::backend::BlendOperation equation,
 			cocos2d::backend::BlendFactor funcSrc,
 			cocos2d::backend::BlendFactor funcDst,
+			cocos2d::backend::Program* program);
+		bool init(const std::string& name,
+			cocos2d::backend::BlendOperation equation,
+			cocos2d::backend::BlendFactor funcSrc,
+			cocos2d::backend::BlendFactor funcDst,
+			cocos2d::backend::BlendOperation aequation,
+			cocos2d::backend::BlendFactor afuncSrc,
+			cocos2d::backend::BlendFactor afuncDst,
 			cocos2d::backend::Program* program);
 		cocos2d::backend::ProgramState* tempraryProgramState();
 		void setVertexLayout(cocos2d::backend::ProgramState* state) const;

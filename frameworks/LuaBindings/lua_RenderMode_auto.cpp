@@ -92,7 +92,39 @@ int lua_x_RenderMode_RenderMode_create(lua_State* tolua_S)
 		}
 	} while (0);
 	ok = true;
-	LUA_PARAMETER_ERROR(tolua_S, LUA_FNAME, argc, "5");
+	do {
+		if (argc == 8) {
+			std::string arg0;
+			ok &= luaval_to_std_string(tolua_S, 2, &arg0, LUA_FNAME);
+			if (!ok) { break; }
+			cocos2d::backend::BlendOperation arg1;
+			ok &= luaval_to_native(tolua_S, 3, &arg1, LUA_FNAME);
+			if (!ok) { break; }
+			cocos2d::backend::BlendFactor arg2;
+			ok &= luaval_to_native(tolua_S, 4, &arg2, LUA_FNAME);
+			if (!ok) { break; }
+			cocos2d::backend::BlendFactor arg3;
+			ok &= luaval_to_native(tolua_S, 5, &arg3, LUA_FNAME);
+			if (!ok) { break; }
+			cocos2d::backend::BlendOperation arg4;
+			ok &= luaval_to_native(tolua_S, 6, &arg4, LUA_FNAME);
+			if (!ok) { break; }
+			cocos2d::backend::BlendFactor arg5;
+			ok &= luaval_to_native(tolua_S, 7, &arg5, LUA_FNAME);
+			if (!ok) { break; }
+			cocos2d::backend::BlendFactor arg6;
+			ok &= luaval_to_native(tolua_S, 8, &arg6, LUA_FNAME);
+			if (!ok) { break; }
+			cocos2d::backend::Program* arg7;
+			ok &= luaval_to_native(tolua_S, 9, &arg7, LUA_FNAME);
+			if (!ok) { break; }
+			auto ret = lstg::RenderMode::create(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+			native_to_luaval(tolua_S, ret);
+			return 1;
+		}
+	} while (0);
+	ok = true;
+	LUA_PARAMETER_ERROR(tolua_S, LUA_FNAME, argc, "8");
 }
 int lua_x_RenderMode_RenderMode_getBlendDescriptor(lua_State* tolua_S)
 {

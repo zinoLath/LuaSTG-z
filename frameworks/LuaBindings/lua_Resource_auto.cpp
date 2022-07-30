@@ -476,6 +476,20 @@ int lua_x_Resource_ResTexture_render(lua_State* tolua_S)
 		}
 	} while (false);
 	ok = true;
+	do {
+		if (argc == 3) {
+			lstg::RenderMode* arg0;
+			ok &= luaval_to_native(tolua_S, 2, &arg0, LUA_FNAME);
+			if (!ok) { break; }
+			lstg::Triangles* arg1;
+			ok &= luaval_to_native(tolua_S, 3, &arg1, "LUA_FNAME");
+			if (!ok) { break; }
+			auto ret = cobj->render(arg0, arg1);
+			tolua_pushboolean(tolua_S, (bool)ret);
+			return 1;
+		}
+	} while (false);
+	ok = true;
 	LUA_PARAMETER_ERROR(tolua_S, LUA_FNAME, argc, "1");
 }
 int lua_x_Resource_ResTexture_setTriangles(lua_State* tolua_S)

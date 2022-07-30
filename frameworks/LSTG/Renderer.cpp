@@ -548,6 +548,11 @@ bool XRenderer::renderTexture(ResTexture* p, V3F_C4B_T2F_Quad* quad)noexcept
 	return renderTexture(p->getTexture(), quad);
 }
 
+bool XRenderer::renderTexture(ResTexture* p, Triangles* tris)noexcept
+{
+	return renderTexture(p->getTexture(), tris->getTri());
+}
+
 bool XRenderer::renderText(ResFont* p, const std::string& str, float x, float y, float scale,
 	TextHAlignment halign, TextVAlignment valign)noexcept
 {

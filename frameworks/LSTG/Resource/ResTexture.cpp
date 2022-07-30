@@ -14,6 +14,12 @@ void ResTexture::setTriangles(Triangles* tri)
 	CC_SAFE_RETAIN(xtri);
 }
 
+bool ResTexture::render(RenderMode* blend, Triangles* tri)
+{
+	LRR.updateRenderMode(blend);
+	return LRR.renderTexture(this, tri);
+}
+
 bool ResTexture::render(const V3F_C4B_T2F_Quad& quad)
 {
 	const auto q = LMP.getQuad();

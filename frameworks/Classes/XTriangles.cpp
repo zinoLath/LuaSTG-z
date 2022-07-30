@@ -221,3 +221,8 @@ Triangles* Triangles::clone()
 	}
 	return ret;
 }
+
+cocos2d::TrianglesCommand::Triangles Triangles::getTri()
+{
+	return tri;
+}

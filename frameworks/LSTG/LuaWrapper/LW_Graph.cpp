@@ -162,3 +162,11 @@ LUA_REGISTER_FUNC_DEF(lstg, SetMSAALevel)
 	lua_pushboolean(L, ok);
 	return 1;
 }
+
+
+LUA_REGISTER_FUNC_DEF(lstg, FlushTriangles)
+{
+	LRR.flushTriangles();
+	LRR.setProgramStateDirty();
+	return 0;
+}

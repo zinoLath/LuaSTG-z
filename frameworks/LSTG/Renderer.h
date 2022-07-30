@@ -157,7 +157,7 @@ namespace lstg
 		bool renderTexture(cocos2d::Texture2D* t, cocos2d::V3F_C4B_T2F_Quad* quad)noexcept;
 		bool renderTexture(cocos2d::Texture2D* t, const cocos2d::TrianglesCommand::Triangles& triangles)noexcept;
 		bool renderTexture(ResTexture* p, cocos2d::V3F_C4B_T2F_Quad* quad)noexcept;
-
+		bool renderTexture(ResTexture* p, Triangles* tris)noexcept;
 		// TODO: render video
 
 		// render text

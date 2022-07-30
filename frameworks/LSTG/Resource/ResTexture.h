@@ -16,6 +16,7 @@ namespace lstg {
 		Triangles* getTriangles() const { return xtri; }
 		void setTriangles(Triangles* tri);
 
+		bool render(RenderMode* blend, Triangles* tri);
 		bool render(const cocos2d::V3F_C4B_T2F_Quad& quad);
 		bool render(RenderMode* blend, const cocos2d::V3F_C4B_T2F_Quad& quad);
 

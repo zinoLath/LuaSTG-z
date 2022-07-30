@@ -62,11 +62,12 @@ void RenderMode::destructDefault()
 	RenderModeDefault = nullptr;
 }
 
-RenderMode* RenderMode::create(const std::string& name, BlendOperation blendOp,
-	BlendFactor blendFactorSrc, BlendFactor blendFactorDst, Program* program)
+RenderMode* RenderMode::create(const std::string& name, BlendOperation blendOp, BlendFactor blendFactorSrc, BlendFactor blendFactorDst, 
+	cocos2d::backend::BlendOperation alphaBlendOp, cocos2d::backend::BlendFactor alphaBlendFactorSrc, cocos2d::backend::BlendFactor alphaBlendFactorDst,
+	Program* program )
 {
 	auto ret = new (std::nothrow) RenderMode();
-	if (ret&&ret->init(name, blendOp, blendFactorSrc, blendFactorDst, program))
+	if (ret && ret->init(name, blendOp, blendFactorSrc, blendFactorDst, alphaBlendOp, alphaBlendFactorSrc, alphaBlendFactorDst, program))
 	{
 		ret->autorelease();
 		addMode(ret);
@@ -74,6 +75,13 @@ RenderMode* RenderMode::create(const std::string& name, BlendOperation blendOp,
 	}
 	CC_SAFE_DELETE(ret);
 	return nullptr;
+}
+
+RenderMode* RenderMode::create(const std::string& name, BlendOperation blendOp,
+	BlendFactor blendFactorSrc, BlendFactor blendFactorDst, Program* program)
+{
+	return create(name, blendOp, blendFactorSrc, blendFactorDst, BlendOperation::ADD,
+		BlendFactor::ONE, BlendFactor::ONE_MINUS_SRC_ALPHA, program);
 }
 
 RenderMode* RenderMode::create(const std::string& name, Program* program)
@@ -213,13 +221,22 @@ RenderMode* RenderMode::clone(const std::string& newName)
 	return ret;
 }
 
+bool RenderMode::init(const std::string& name, BlendOperation equation, BlendFactor funcSrc, BlendFactor funcDst, Program* program)
+{
+	return init(name, equation, funcSrc, funcDst, BlendOperation::ADD, BlendFactor::ONE, BlendFactor::ONE_MINUS_SRC_ALPHA, program);
+}
+
 bool RenderMode::init(const std::string& name, BlendOperation equation,
-                      BlendFactor funcSrc, BlendFactor funcDst, Program* program)
+                      BlendFactor funcSrc, BlendFactor funcDst, BlendOperation aequation, 
+					  BlendFactor afuncSrc, BlendFactor afuncDst, Program* program)
 {
 	if (!program)return false;
 	if (!util::CheckBlendOperation(equation))return false;
 	if (!util::CheckBlendFactor(funcSrc))return false;
 	if (!util::CheckBlendFactor(funcDst))return false;
+	if (!util::CheckBlendOperation(aequation))return false;
+	if (!util::CheckBlendFactor(afuncSrc))return false;
+	if (!util::CheckBlendFactor(afuncDst))return false;
 
 	_name = name;
 	desc.blendEnabled = true;
@@ -228,9 +245,9 @@ bool RenderMode::init(const std::string& name, BlendOperation equation,
 	desc.destinationRGBBlendFactor = funcDst;
 	//note: keep alpha here
 	//TODO: custom for RenderTarget
-	desc.alphaBlendOperation = BlendOperation::ADD;
-	desc.sourceAlphaBlendFactor = BlendFactor::ONE;
-	desc.destinationAlphaBlendFactor = BlendFactor::ONE_MINUS_SRC_ALPHA;
+	desc.alphaBlendOperation = aequation;
+	desc.sourceAlphaBlendFactor = afuncSrc;
+	desc.destinationAlphaBlendFactor = afuncDst;
 
 	GetDefaultVertexLayout(program, &defaultLayout);
 	setProgram(program);

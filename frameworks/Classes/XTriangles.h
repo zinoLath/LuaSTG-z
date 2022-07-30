@@ -46,5 +46,6 @@ namespace lstg
 		void setIndex(size_t index, unsigned short value);
 
 		Triangles* clone();
+		cocos2d::TrianglesCommand::Triangles getTri();
 	};
 }
