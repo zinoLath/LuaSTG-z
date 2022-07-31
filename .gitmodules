@@ -18,10 +18,10 @@
 	url = https://github.com/Xrysnow/creator_to_cocos2dx.git
 [submodule "frameworks/runtime-src/external"]
 	path = frameworks/external
-	url = https://github.com/Xrysnow/lstgx_external.git
+url=https://github.com/zinoLath/cocos2d-x-3rd-party-libs-bin.git
 [submodule "frameworks/cocos2d-x"]
 	path = frameworks/cocos2d-x
-	url = https://github.com/Xrysnow/cocos2d-x.git
+url=https://github.com/zinoLath/cocos2d-x.git
 [submodule "src"]
 	path = src
 	url = https://github.com/Xrysnow/lstgx_LuaCore.git
